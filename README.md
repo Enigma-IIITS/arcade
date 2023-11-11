@@ -20,4 +20,4 @@ $ ./a.out
 ## Contribution Guidelines
 - Try not to commit any binary files. If you have to, use git-lfs.
 - Use `PascalCase` for type names, type aliases and `snake_case` for function and variable names.
-- Format all the source files using `clang-format` before making a commit.
+- Format all the source files using `clang-format` before making a commit. 

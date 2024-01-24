@@ -42,6 +42,48 @@ void emulator_init(Emulator *emu) {
 }
 
 void emulator_load_rom(Emulator *restrict emu, const uint8_t *restrict rom, size_t len) {
+
+    FILE *fp ;
+    fp = fopen("hexadecimalformatgiver","r");
+    //opens the requested file
+    if(fp ==NULL)
+    {
+        printf("file is not opened successfully");
+        exit(0);
+    }
+
+    fseek(fp,0,SEEK_END);
+    long file_size = ftell(fp);
+    rewind(fp);
+    //searches for the end of the file and makes the fp point to the end of the file
+    // stores the value at which the end is there in file_size
+    //makes the file pointer point back to the first location it is pointing to 
+
+    char *rom;
+    rom = (char*) malloc(sizeof(char)*(file_size+1));
+    //dynamically allocated the required space for the data to be stored in an array
+    int i = 0 ;
+    char character ;
+    while(!feof(fp))
+    {
+      
+        character = fgetc(fp);
+        rom[i] = character;
+        i++;
+        
+    }
+    rom[i] = '\0';
+   int j = 0 ;
+	  while(j < i-1)
+  {
+    printf("%c",rom[j]);
+    j++;
+  }
+    
+     free(rom);
+    fclose(fp);
+
+
 	for (size_t i = 0; i < len; ++i) {
 		emu->memory[0x200 + i] = rom[i];
 	}

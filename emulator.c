@@ -44,7 +44,7 @@ void emulator_init(Emulator *emu) {
 void emulator_load_rom(Emulator *restrict emu, const uint8_t *restrict rom, size_t len) {
 
     FILE *fp ;
-    fp = fopen("hexadecimalformatgiver","r");
+    fp = fopen("hexadecimalformatgiver","rb");
     //opens the requested file
     if(fp ==NULL)
     {

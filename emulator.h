@@ -4,7 +4,8 @@
 #include <assert.h>
 #include <stddef.h>
 #include <stdint.h>
-
+#include <stdlib.h>
+#include <stdio.h>
 
 #define MEMORY_SIZE (4 * 1024)
 

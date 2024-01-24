@@ -46,3 +46,14 @@ void emulator_load_rom(Emulator *restrict emu, const uint8_t *restrict rom, size
 		emu->memory[0x200 + i] = rom[i];
 	}
 }
+
+uint16_t emulator_fetch(Emulator *emu) {
+
+    uint8_t instr_h, instr_l;
+    instr_h = emu->memory[emu->program_counter];
+    instr_l = emu->memory[emu->program_counter + 1];
+    
+    uint16_t instr = (instr_h << 8)| instr_l;
+    emu->program_counter = emu->program_counter + 2;
+    return instr;
+}

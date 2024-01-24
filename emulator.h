@@ -39,7 +39,7 @@ void emulator_load_rom(Emulator *restrict emu, const uint8_t *restrict rom, size
 void emulator_tick_timers(Emulator *emu);
 
 /// Fetch the next instruction.
-uint32_t emulator_fetch(Emulator *emu);
+uint16_t emulator_fetch(Emulator *emu);
 
 /// Execute the given instruction.
 void emulator_execute(Emulator *emu, uint16_t instr);

@@ -1,5 +1,5 @@
 #include "emulator.h"
-
+#include <assert.h>
 
 static void emulator_load_font(Emulator *emu) {
 	static const uint8_t FONTSET[80] = {
@@ -28,7 +28,6 @@ static void emulator_load_font(Emulator *emu) {
 	}
 }
 
-
 void emulator_init(Emulator *emu) {
 	assert(emu != 0);
 
@@ -48,12 +47,11 @@ void emulator_load_rom(Emulator *restrict emu, const uint8_t *restrict rom, size
 }
 
 uint16_t emulator_fetch(Emulator *emu) {
+	uint8_t instr_h, instr_l;
+	instr_h = emu->memory[emu->program_counter];
+	instr_l = emu->memory[emu->program_counter + 1];
 
-    uint8_t instr_h, instr_l;
-    instr_h = emu->memory[emu->program_counter];
-    instr_l = emu->memory[emu->program_counter + 1];
-    
-    uint16_t instr = (instr_h << 8)| instr_l;
-    emu->program_counter = emu->program_counter + 2;
-    return instr;
+	uint16_t instr = (instr_h << 8) | instr_l;
+	emu->program_counter = emu->program_counter + 2;
+	return instr;
 }

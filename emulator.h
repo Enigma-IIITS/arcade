@@ -1,11 +1,8 @@
 #ifndef EMULATOR_H_
 #define EMULATOR_H_
 
-#include <assert.h>
 #include <stddef.h>
 #include <stdint.h>
-#include <stdlib.h>
-#include <stdio.h>
 
 #define MEMORY_SIZE (4 * 1024)
 

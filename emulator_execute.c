@@ -1,7 +1,7 @@
 #include "emulator.h"
+#include <stdlib.h>
 
 void emulator_execute(Emulator *emu, uint16_t instr) {
-	
 	/*types of instructions
 		op N N N
 		op X N N
@@ -10,16 +10,15 @@ void emulator_execute(Emulator *emu, uint16_t instr) {
 
 	uint16_t NNN;
 	uint8_t op, X, Y, N, NN;
-	op = (instr & 0xF000) >> 12;
-	X = (instr & 0x0F00) >> 8;
-	Y = (instr & 0x00F0) >> 4;
-	N = (instr & 0x000F);
+	op = (uint8_t) (instr >> 12 & 0xF);
+	X = (uint8_t) (instr >> 8 & 0xF);
+	Y = (uint8_t) (instr >> 4 & 0xF);
+	N = (uint8_t) (instr & 0xF);
 
-	NN = (instr & 0x00FF);
+	NN = (uint8_t) (instr & 0x00FF);
 	NNN = (instr & 0x0FFF);
 
 	switch (op) {
-
 		case 0x0:
 			if (N == 0x0) {
 				// TO DO clear screen
@@ -65,7 +64,7 @@ void emulator_execute(Emulator *emu, uint16_t instr) {
 			emu->program_counter = NNN + emu->registers[0];
 			break;
 		case 0xC:
-			emu->registers[X] = rand() & NN;
+			emu->registers[X] = (uint8_t) (rand() & NN);
 			break;
 		case 0xD:
 			// TO DO display

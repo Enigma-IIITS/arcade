@@ -71,6 +71,42 @@ void emulator_execute(Emulator *emu, uint16_t instr) {
 		case 0xE:
 			// TO DO keypress
 		case 0xF:
+			switch (NN) {
+				case 0x07:
+					emu->registers[X] = emu->delay_timer;
+					break;
+				case 0x0A:
+					// TO DO wait for keypress
+					break;
+				case 0x15:
+					emu->delay_timer = emu->registers[X];
+					break;
+				case 0x18:
+					emu->sound_timer = emu->registers[X];
+					break;
+				case 0x1E:
+					emu->address_register += emu->registers[X];
+					break;
+				case 0x29:
+					emu->address_register = 5 * emu->registers[X];
+					break;
+				case 0x33:
+					emu->memory[emu->address_register] = (emu->registers[X] / 100);
+					emu->memory[emu->address_register] = (emu->registers[X] / 10) % 10;
+					emu->memory[emu->address_register] = (emu->registers[X]) % 10;
+					break;
+				case 0x55:
+					for (uint8_t i = 0; i <= X; i++) {
+						emu->memory[emu->address_register + i] = emu->registers[i];
+					}
+					break;
+				case 0x65:
+					for (uint8_t i = 0; i <= X; i++) {
+						emu->registers[i] = emu->memory[emu->address_register + i];
+					}
+					break;
+			}
+			break;
 		case 0x8:
 			switch (N) {
 				case 0x0:

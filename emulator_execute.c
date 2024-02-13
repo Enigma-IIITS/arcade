@@ -72,6 +72,40 @@ void emulator_execute(Emulator *emu, uint16_t instr) {
 			// TO DO keypress
 		case 0xF:
 		case 0x8:
+			switch (N) {
+				case 0x0:
+					emu->registers[X] = emu->registers[Y];
+					break;
+				case 0x1:
+					emu->registers[X] = emu->registers[X] | emu->registers[Y];
+					break;
+				case 0x2:
+					emu->registers[X] = emu->registers[X] & emu->registers[Y];
+					break;
+				case 0x3:
+					emu->registers[X] = emu->registers[X] ^ emu->registers[Y];
+					break;
+				case 0x4:
+					emu->registers[X] = emu->registers[X] + emu->registers[Y];
+					emu->registers[0xF] = (uint8_t) (emu->registers[X] < emu->registers[Y]);
+					break;
+				case 0x5:
+					emu->registers[0xF] = (uint8_t) (emu->registers[X] > emu->registers[Y]);
+					emu->registers[X] = emu->registers[X] - emu->registers[Y];
+					break;
+				case 0x6:
+					emu->registers[X] = emu->registers[X] >> 1;
+					emu->registers[0xF] = emu->registers[X] | 0x01;
+					break;
+				case 0x7:
+					emu->registers[0xF] = (uint8_t) (emu->registers[Y] > emu->registers[X]);
+					emu->registers[X] = emu->registers[Y] - emu->registers[X];
+					break;
+				case 0xE:
+					emu->registers[X] = emu->registers[X] << 1;
+					emu->registers[0xF] = emu->registers[X] >> 8;
+					break;
+			}
 			break;
 	}
 }

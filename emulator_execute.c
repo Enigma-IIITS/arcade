@@ -130,16 +130,16 @@ void emulator_execute(Emulator *emu, uint16_t instr) {
 					emu->registers[X] = emu->registers[X] - emu->registers[Y];
 					break;
 				case 0x6:
-					emu->registers[X] = emu->registers[X] >> 1;
 					emu->registers[0xF] = emu->registers[X] | 0x01;
+					emu->registers[X] = emu->registers[X] >> 1;
 					break;
 				case 0x7:
 					emu->registers[0xF] = (uint8_t) (emu->registers[Y] > emu->registers[X]);
 					emu->registers[X] = emu->registers[Y] - emu->registers[X];
 					break;
 				case 0xE:
+					emu->registers[0xF] = emu->registers[X] >> 7;
 					emu->registers[X] = emu->registers[X] << 1;
-					emu->registers[0xF] = emu->registers[X] >> 8;
 					break;
 			}
 			break;

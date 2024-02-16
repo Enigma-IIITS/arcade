@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <raylib.h>
 
 uint8_t *rom_loader(const char *rom_filename, size_t *rom_len) {
 	// Open the file in binary mode
@@ -46,6 +47,10 @@ int main(void) {
 	const char *rom_file = "./assets/roms/PONG2";
 	uint8_t *rom_data = rom_loader(rom_file, &rom_len);
 
+	const int screenWidth = 640;
+    const int screenHeight = 320;
+    InitWindow(screenWidth, screenHeight, "CHIP-8 Emulator");
+
 	// Initialize an emulator instance
 	Emulator emu = {0};
 	emulator_init(&emu);
@@ -53,6 +58,31 @@ int main(void) {
 	// Load the ROM into the emulator memory and free the temp buffer
 	emulator_load_rom(&emu, rom_data, rom_len);
 	free(rom_data);
+
+	while (!WindowShouldClose()) {
+        
+        chip8_emulate_cycle(&emu);
+
+        
+        // Drawing CHIP-8 screen using Raylib
+		//I am takin each pixel 10x10
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+
+        
+        for (int y = 0; y < SCREEN_HEIGHT; y++) {
+            for (int x = 0; x < SCREEN_WIDTH; x++) {
+                if (emu.screen[y * SCREEN_WIDTH + x]) {
+                    DrawRectangle(x * 10, y * 10, 10, 10, BLACK);
+                }
+            }
+        }
+
+        EndDrawing();
+    }
+
+    
+    CloseWindow();
 
 	// Work with the emulator here...
 

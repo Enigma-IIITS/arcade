@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <raylib.h>
+#include "raylib.h"
 
 uint8_t *rom_loader(const char *rom_filename, size_t *rom_len) {
 	// Open the file in binary mode
@@ -70,13 +70,13 @@ int main(void) {
         ClearBackground(RAYWHITE);
 
         
-        for (int y = 0; y < SCREEN_HEIGHT; y++) {
-            for (int x = 0; x < SCREEN_WIDTH; x++) {
-                if (emu.screen[y * SCREEN_WIDTH + x]) {
-                    DrawRectangle(x * 10, y * 10, 10, 10, BLACK);
-                }
-            }
-        }
+        // for (int y = 0; y < screenHeight; y++) {
+        //     for (int x = 0; x < screenWidth; x++) {
+        //         if (emu.screen[y * screenWidth + x]) {
+        //             DrawRectangle(x * 10, y * 10, 10, 10, BLACK);
+        //         }
+        //     }
+        // }
 
         EndDrawing();
     }

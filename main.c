@@ -68,7 +68,7 @@ int main(void) {
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
-        
+        DrawText("Load the game here plz!!!", 190, 200, 20, BLACK);
         
 
         EndDrawing();

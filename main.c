@@ -64,19 +64,12 @@ int main(void) {
         chip8_emulate_cycle(&emu);
 
         
-        // Drawing CHIP-8 screen using Raylib
-		//I am takin each pixel 10x10
+        
         BeginDrawing();
         ClearBackground(RAYWHITE);
 
         
-        // for (int y = 0; y < screenHeight; y++) {
-        //     for (int x = 0; x < screenWidth; x++) {
-        //         if (emu.screen[y * screenWidth + x]) {
-        //             DrawRectangle(x * 10, y * 10, 10, 10, BLACK);
-        //         }
-        //     }
-        // }
+        
 
         EndDrawing();
     }

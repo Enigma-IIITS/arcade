@@ -1,3 +1,7 @@
+# raylib
+For the raylib you need to install ray lib on your PC
+Best method is (which i have found) go the raylib github repo ----> download version 4.0 installer.exe from the releases ------> it automatically installs notpad++ for raylib which is best for compiling raylib files as to do so in vs code requiers a lot of configuration files ------> run the code on notepad++
+
 # arcade
 A CHIP-8 virtual machine in C.
 
